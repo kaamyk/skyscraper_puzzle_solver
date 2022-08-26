@@ -35,11 +35,10 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	i = 0;
-	while (i < 16)
+	while (i++ < 16)
 	{
-		tab[i] = 0;
-		view[i] = 0;
-		i++;
+		tab[i - 1] = 0;
+		view[i - 1] = 0;
 	}
 	if (argc != 2 || !ft_debug(view, argv[1]))
 		return (0);

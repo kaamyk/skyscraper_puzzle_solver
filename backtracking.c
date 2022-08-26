@@ -1,8 +1,8 @@
 int	ft_is_in_line(int *tab, int i, int val);
 int	ft_is_in_col(int *tab, int i, int val);
 int	ft_view_is_valid(int *tab, int *view, int i, int value);
-int	ft_lin_view_valid(int *tab, int *view, int i, int value);
-int	ft_col_view_valid(int *tab, int *view, int i, int value);
+int	ft_lin_view_valid(int *tab, int *view, int i);
+int	ft_col_view_valid(int *tab, int *view, int i);
 
 int	ft_line_complete(int *tab, int position)
 {
@@ -41,11 +41,20 @@ int	ft_column_complete(int *tab, int position)
 	}
 	return (col_comp);
 }
-
+#include <stdio.h>
 int	ft_is_valid(int *tab, int *view, int position)
 {
 	int	k;
+	int	i = 0;
 
+    while (i < 16)
+    {
+        printf("%d", tab[i]);
+        if (i % 4 == 3)
+            printf("\n");
+        i++;
+    }
+	printf("\n\n");
 	k = 1;
 	if (position == 16)
 		return (1);
@@ -58,7 +67,7 @@ int	ft_is_valid(int *tab, int *view, int position)
 			tab[position] = k;
 			if (ft_line_complete(tab, position))
 			{
-				if (ft_lin_view_valid(tab, view, position, k))
+				if (ft_lin_view_valid(tab, view, position))
 				{
 					if (ft_is_valid(tab, view, position + 1))
 						return (1);
