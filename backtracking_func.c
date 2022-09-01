@@ -28,7 +28,13 @@ int	ft_is_in_col(int *tab, int i, int val)
 	return (0);
 }
 
-int	ft_lin_view_valid(int *tab, int *view, int position, int value)
+void	ft_assigne(int value, int *tmp, int *ctr)
+{
+	*tmp = value;
+	(*ctr)++;
+}
+
+int	ft_lin_view_valid(int *tab, int *view, int position)
 {
 	int	ctr;
 	int	ctr_r;
@@ -36,7 +42,6 @@ int	ft_lin_view_valid(int *tab, int *view, int position, int value)
 	int	tmp1;
 	int	tmp2;
 
-	(void)value;
 	ctr = 1;
 	ctr_r = 1;
 	j = (4 * (position / 4));
@@ -45,46 +50,41 @@ int	ft_lin_view_valid(int *tab, int *view, int position, int value)
 	while (j % 4 <= 3)
 	{
 		if (tab[j] > tmp1)
-		{
-			tmp1 = tab[j];
-			ctr++;
-		}
+			ft_assigne(tab[j], &tmp1, &ctr);
 		if (tab[j] < tmp2)
-		{
-			tmp2 = tab[j];
-			ctr_r++;
-		}
+			ft_assigne(tab[j], &tmp2, &ctr_r);
 		if (j % 4 == 3)
 			break ;
 		j++;
 	}
-	if ((ctr != view[8 + (position / 4)])
-		|| (ctr_r != view[12 + (position / 4)]))
+	if (ctr != view[8 + (position / 4)] || ctr_r != view[12 + (position / 4)])
 		return (0);
 	else
 		return (1);
 }
 
-int	ft_col_view_valid(int *tab, int *view, int position, int value)
+int	ft_col_view_valid(int *tab, int *view, int position)
 {
 	int	ctr;
 	int	ctr_r;
 	int	j;
+	int	tmp1;
+	int	tmp2;
 
-	(void)value;
 	ctr = 1;
 	ctr_r = 4;
 	j = position % 4;
+	tmp1 = tab[j];
+	tmp2 = tab[j];
 	while (j < 12)
 	{
-		if (tab[j] < tab[j + 4])
-		{
-			ctr++;
-			ctr_r--;
-		}
+		if (tab[j] > tmp1)
+			ft_assigne(tab[j], &tmp1, &ctr);
+		if (tab[j] < tmp2)
+			ft_assigne(tab[j], &tmp2, &ctr_r);
 		j = j + 4;
 	}
-	if ((ctr > view[position % 4]) && (ctr_r < view[4 + position % 4]))
+	if (ctr != view[position % 4] && ctr_r != view[4 + position % 4])
 		return (0);
 	else
 		return (1);
