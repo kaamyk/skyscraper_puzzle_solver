@@ -27,6 +27,20 @@ void	ft_init_view(char *arg, int *view)
 	}
 }
 
+void	ft_print_tab(int *tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		printf("%d", tab[i]);
+		if (i % 4 == 3)
+			printf("\n");
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int	tab[16];
@@ -46,13 +60,6 @@ int	main(int argc, char **argv)
 	ft_init_view(argv[1], view);
 	ft_init_tab(tab, view);
 	ft_is_valid(tab, view, 0);
-	i = 0;
-	while (i < 16)
-	{
-		printf("%d", tab[i]);
-		if (i % 4 == 3)
-			printf("\n");
-		i++;
-	}
+	ft_print_tab(tab);
 	return (0);
 }
