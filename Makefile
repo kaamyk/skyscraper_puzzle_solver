@@ -1,4 +1,4 @@
-SRCS = main.c backtracking.c backtracking_func.c debug.c init_tab.c
+SRCS = main.c backtracking.c backtracking_functions.c debug.c init_tab.c
 NAME = skyscraper_puzzle_solver
 
 all : $(NAME)

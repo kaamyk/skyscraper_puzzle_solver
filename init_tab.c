@@ -1,29 +1,29 @@
-void	ft_set_col(int *tab, int i, int order)
+void	ft_set_col(int *tab, int t_index, int order)
 {
 	int	ctr;
 
 	ctr = 1;
 	if (order > 0)
 	{
-		while (i < 16)
+		while (t_index < 16)
 		{
-			tab[i] = ctr;
+			tab[t_index] = ctr;
 			ctr++;
-			i = i + 4;
+			t_index = t_index + 4;
 		}
 	}
 	if (order < 0)
 	{
-		while (i >= 0)
+		while (t_index >= 0)
 		{
-			tab[i] = ctr;
+			tab[t_index] = ctr;
 			ctr++;
-			i = i - 4;
+			t_index = t_index - 4;
 		}
 	}
 }
 
-void	ft_set_lin(int *tab, int i, int order)
+void	ft_set_lin(int *tab, int t_index, int order)
 {
 	int	j;
 
@@ -32,8 +32,8 @@ void	ft_set_lin(int *tab, int i, int order)
 		j = 1;
 		while (j <= 4)
 		{
-			tab[i] = j;
-			i++;
+			tab[t_index] = j;
+			t_index++;
 			j++;
 		}
 	}
@@ -42,71 +42,71 @@ void	ft_set_lin(int *tab, int i, int order)
 		j = 4;
 		while (j > 0)
 		{
-			tab[i] = 4 - j;
-			i--;
+			tab[t_index] = 4 - j;
+			t_index--;
 			j--;
 		}
 	}
 }
 
-void	ft_read_col_views(int *tab, int *view, int i, int j)
+void	ft_read_col_views(int *tab, int *view, int t_index, int v_index)
 {
-	if (i % 4 == 0 && j / 4 == 0)
+	if (t_index / 4 == 0 && v_index / 4 == 0)
 	{
-		if (view[j] == 1)
-			tab[i] = 4;
-		else if (view[j] == 4)
-			ft_set_col(tab, i, 1);
+		if (view[v_index] == 1)
+			tab[t_index] = 4;
+		else if (view[v_index] == 4)
+			ft_set_col(tab, t_index, 1);
 	}
-	else if (i % 4 == 3 && j / 4 == 1)
+	else if (t_index / 4 == 3 && v_index / 4 == 1)
 	{
-		if (view[j] == 1)
-			tab[i] = 4;
-		else if (view[j] == 4)
-			ft_set_col(tab, i, -1);
+		if (view[v_index] == 1)
+			tab[t_index] = 4;
+		else if (view[v_index] == 4)
+			ft_set_col(tab, t_index, -1);
 	}
 }
 
-void	ft_read_lin_views(int *tab, int *view, int i, int j)
+void	ft_read_lin_views(int *tab, int *view, int t_index, int v_index)
 {
-	if (i % 4 == 0 && j / 4 == 2)
+	if (t_index % 4 == 0 && v_index / 4 == 2)
 	{
-		if (view[j] == 1)
-			tab[i] = 4;
-		else if (view[j] == 4)
-			ft_set_lin(tab, i, 1);
+		if (view[v_index] == 1)
+			tab[t_index] = 4;
+		else if (view[v_index] == 4)
+			ft_set_lin(tab, t_index, 1);
 	}
-	else if (i % 4 == 3 && j / 4 == 3 && view[j] == 1)
+	else if (t_index % 4 == 3 && v_index / 4 == 3 && view[v_index] == 1)
 	{
-		if (view[j] == 1)
-			tab[i] = 4;
-		else if (view[j] == 4)
-			ft_set_lin(tab, i, -1);
+		if (view[v_index] == 1)
+			tab[t_index] = 4;
+		else if (view[v_index] == 4)
+			ft_set_lin(tab, t_index, -1);
 	}
 }
 
 void	ft_init_tab(int *tab, int *view)
 {
-	int	i;
-	int	j;
+	int	t_index;
+	int	v_index;
 
-	i = 0;
-	while (i < 16)
+	t_index = 0;
+	while (t_index < 16)
 	{
-		if (!tab[i])
+		if (!tab[t_index])
 		{
-			j = 0;
-			while (j < 16)
+			v_index = 0;
+			while (v_index < 16)
 			{
-				if (j / 8 == 0 && i % 4 == j % 4)
-					ft_read_col_views(tab, view, i, j);
-				else if (j / 8 == 1 && i / 4 == j % 4)
-					ft_read_lin_views(tab, view, i, j);
-				j++;
+				if (v_index / 8 == 0 && t_index % 4 == v_index % 4)
+					ft_read_col_views(tab, view, t_index, v_index);
+				else if (v_index / 8 == 1 && t_index / 4 == v_index % 4)
+					ft_read_lin_views(tab, view, t_index, v_index);
+				v_index++;
 			}
-			i++;
+			t_index++;
 		}
 		else
-			i++;
+			t_index++;
 	}
 }

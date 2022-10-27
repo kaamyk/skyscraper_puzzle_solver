@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 int	ft_args_valid(char *arg)
 {
 	int	i;
@@ -20,7 +22,6 @@ int	ft_args_valid(char *arg)
 		return (1);
 	else
 		return (0);
-	return (1);
 }
 
 int	ft_views_valid(int *view)
@@ -30,10 +31,13 @@ int	ft_views_valid(int *view)
 	i = 0;
 	while (i < 12)
 	{
+		if (i == 4)
+		{
+			i = i + 4;
+			continue ;
+		}
 		if (view[i] + view[i + 4] > 5 || view[i] + view[i + 4] < 3)
 			return (0);
-		if (i == 4)
-			i = i + 3;
 		i++;
 	}
 	return (1);
